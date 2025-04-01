@@ -44,8 +44,6 @@ const AdminHeader = () => {
           ))}
         </div>
       </div>
-
-      {/* ❌ Removed the gradient spacer div that was pushing the cards down */}
     </div>
   );
 };
