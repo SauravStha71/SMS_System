@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import "../styles/index.css";
 import coverImage from "../assets/cover.jpg"; // Adjust path if necessary
 import { FaUser } from "react-icons/fa";
@@ -9,7 +9,7 @@ import "tailwindcss";
 
 const LoginRegister = () => {
   const { login } = useContext(AuthContext); // Get login function from context
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   // State to toggle between login and register
   const [isLogin, setIsLogin] = useState(true);
