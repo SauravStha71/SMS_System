@@ -19,8 +19,8 @@ const AdminHeader = () => {
       />
 
       {/* Floating navbar */}
-      <div className="absolute top-[190px] left-1/2 transform -translate-x-1/2 z-10">
-        <div className="bg-gradient-to-b from-[#BFE0F1] to-white shadow-lg rounded-[40px] px-10 py-2 flex gap-10 items-center">
+      <div className="absolute top-[170px] left-1/2 transform -translate-x-1/2 z-10">
+  <div className="bg-gradient-to-b from-[#BFE0F1] to-white shadow-lg rounded-[40px] px-12 py-4 flex gap-12 items-center">
           {[
             { name: "Dashboard", href: "/admin/dashboard" },
             { name: "Preview Data", href: "/admin/preview-data" },
