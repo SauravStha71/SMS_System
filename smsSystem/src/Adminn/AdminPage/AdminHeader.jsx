@@ -1,8 +1,16 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.jpg';
 import bgImage from '../../assets/bg.jpg';
 
 const AdminHeader = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault(); // prevent link default behavior
+    navigate('/');
+  };
+
   return (
     <>
       <style>
@@ -52,6 +60,7 @@ const AdminHeader = () => {
             border-radius: 40px;
             white-space: nowrap;
             transition: all 0.2s ease;
+            text-decoration: none;
           }
           .admin-header__link:hover {
             background-color: white;
@@ -64,6 +73,7 @@ const AdminHeader = () => {
           }
         `}
       </style>
+
       <div className="admin-header">
         <div
           className="admin-header__bg"
@@ -74,21 +84,25 @@ const AdminHeader = () => {
 
         <div className="admin-header__navbar-container">
           <div className="admin-header__navbar">
-            {[
-              { name: "Dashboard", href: "/admin/dashboard" },
-              { name: "Preview Data", href: "/admin/preview-data" },
-              { name: "SMS Report", href: "/admin/sms-report" },
-              { name: "Manage User", href: "/admin/manage-user" },
-              { name: "Log Out", href: "/logout", special: true },
-            ].map(({ name, href, special }) => (
-              <a
-                key={name}
-                href={href}
-                className={`admin-header__link ${special ? "special" : ""}`}
-              >
-                {name}
-              </a>
-            ))}
+            <Link to="/admin/dashboard" className="admin-header__link">
+              Dashboard
+            </Link>
+            <Link to="/admin/preview-data" className="admin-header__link">
+              Preview Data
+            </Link>
+            <Link to="/admin/sms-report" className="admin-header__link">
+              SMS Report
+            </Link>
+            <Link to="/admin/manage-users" className="admin-header__link">
+              Manage User
+            </Link>
+            <a
+              href="/logout"
+              onClick={handleLogout}
+              className="admin-header__link special"
+            >
+              Log Out
+            </a>
           </div>
         </div>
       </div>
