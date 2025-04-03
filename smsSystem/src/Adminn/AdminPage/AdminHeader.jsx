@@ -1,15 +1,24 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo.jpg';
 import bgImage from '../../assets/bg.jpg';
 
 const AdminHeader = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // 👈 get current route
 
   const handleLogout = (e) => {
-    e.preventDefault(); // prevent link default behavior
+    e.preventDefault();
     navigate('/');
   };
+
+  // Define nav links
+  const links = [
+    { name: "Dashboard", to: "/admin/dashboard" },
+    { name: "Preview Data", to: "/admin/preview-data" },
+    { name: "SMS Report", to: "/admin/sms-report" },
+    { name: "Manage User", to: "/admin/manage-users" },
+  ];
 
   return (
     <>
@@ -62,7 +71,8 @@ const AdminHeader = () => {
             transition: all 0.2s ease;
             text-decoration: none;
           }
-          .admin-header__link:hover {
+          .admin-header__link:hover,
+          .admin-header__link.active {
             background-color: white;
             color: #111;
             font-weight: bold;
@@ -84,18 +94,18 @@ const AdminHeader = () => {
 
         <div className="admin-header__navbar-container">
           <div className="admin-header__navbar">
-            <Link to="/admin/dashboard" className="admin-header__link">
-              Dashboard
-            </Link>
-            <Link to="/admin/preview-data" className="admin-header__link">
-              Preview Data
-            </Link>
-            <Link to="/admin/sms-report" className="admin-header__link">
-              SMS Report
-            </Link>
-            <Link to="/admin/manage-users" className="admin-header__link">
-              Manage User
-            </Link>
+            {links.map(({ name, to }) => (
+              <Link
+                key={name}
+                to={to}
+                className={`admin-header__link ${
+                  location.pathname === to ? 'active' : ''
+                }`}
+              >
+                {name}
+              </Link>
+            ))}
+
             <a
               href="/logout"
               onClick={handleLogout}
