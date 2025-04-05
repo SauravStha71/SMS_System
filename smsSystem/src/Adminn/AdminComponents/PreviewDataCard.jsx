@@ -32,67 +32,70 @@ const PreviewDataCard = () => {
   return (
     <div className="p-4">
       {/* Filters Section */}
-      <div className="mb-6 w-full max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 gap-4">
-          
-          {/* Overdue Days Section */}
-          <div className="bg-blue-100 p-4 rounded-lg shadow-md">
-            <label className="font-semibold text-blue-800 block mb-2">Overdue Days</label>
-            <div className="flex gap-2">
-              <input
-                type="number"
-                placeholder="Min"
-                value={filters.minDays}
-                onChange={(e) => setFilters({ ...filters, minDays: e.target.value })}
-                className="border p-2 rounded w-50"
-              />
-              <span className="mt-2">to</span>
-              <input
-                type="number"
-                placeholder="Max"
-                value={filters.maxDays}
-                onChange={(e) => setFilters({ ...filters, maxDays: e.target.value })}
-                className="border p-2 rounded w-50"
-              />
-              <button onClick={applyFilters} className="bg-blue-500 text-white px-4 py-2 rounded">
-                ✔ Apply
-              </button>
-            </div>
-          </div>
-
-          {/* Balance Amount Section */}
-          <div className="bg-blue-100 p-4 rounded-lg shadow-md">
-            <label className="font-semibold text-blue-800 block mb-2">Balance Amount</label>
-            <div className="flex gap-2">
-              <input
-                type="number"
-                placeholder="Min"
-                value={filters.minBalance}
-                onChange={(e) => setFilters({ ...filters, minBalance: e.target.value })}
-                className="border p-2 rounded w-50"
-              />
-              <span className="mt-2">to</span>
-              <input
-                type="number"
-                placeholder="Max"
-                value={filters.maxBalance}
-                onChange={(e) => setFilters({ ...filters, maxBalance: e.target.value })}
-                className="border p-2 rounded w-50"
-              />
-              <button onClick={applyFilters} className="bg-blue-500 text-white px-4 py-2 rounded">
-                ✔ Apply
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Reset Button */}
-        <div className="mt-4 flex justify-end">
-          <button onClick={resetFilters} className="bg-gray-500 text-white px-6 py-2 rounded flex items-center">
-            🔄 Reset All Filters
+<div className="flex justify-center items-start mb-6">
+  <div className="w-full max-w-5xl space-y-4">
+    <div className="grid grid-cols-2 gap-4">
+      
+      {/* Overdue Days Section */}
+      <div className="bg-blue-100 p-4 rounded-lg shadow-md">
+        <label className="font-semibold text-blue-800 block mb-2">Overdue Days</label>
+        <div className="flex gap-2">
+          <input
+            type="number"
+            placeholder="Min"
+            value={filters.minDays}
+            onChange={(e) => setFilters({ ...filters, minDays: e.target.value })}
+            className="border p-2 rounded w-24"
+          />
+          <span className="mt-2">to</span>
+          <input
+            type="number"
+            placeholder="Max"
+            value={filters.maxDays}
+            onChange={(e) => setFilters({ ...filters, maxDays: e.target.value })}
+            className="border p-2 rounded w-24"
+          />
+          <button onClick={applyFilters} className="bg-blue-500 text-white px-4 py-2 rounded">
+            ✔ Apply
           </button>
         </div>
       </div>
+
+      {/* Balance Amount Section */}
+      <div className="bg-blue-100 p-4 rounded-lg shadow-md">
+        <label className="font-semibold text-blue-800 block mb-2">Balance Amount</label>
+        <div className="flex gap-2">
+          <input
+            type="number"
+            placeholder="Min"
+            value={filters.minBalance}
+            onChange={(e) => setFilters({ ...filters, minBalance: e.target.value })}
+            className="border p-2 rounded w-24"
+          />
+          <span className="mt-2">to</span>
+          <input
+            type="number"
+            placeholder="Max"
+            value={filters.maxBalance}
+            onChange={(e) => setFilters({ ...filters, maxBalance: e.target.value })}
+            className="border p-2 rounded w-24"
+          />
+          <button onClick={applyFilters} className="bg-blue-500 text-white px-4 py-2 rounded">
+            ✔ Apply
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {/* Reset Button */}
+    <div className="flex justify-end">
+      <button onClick={resetFilters} className="bg-gray-500 text-white px-6 py-2 rounded flex items-center">
+        🔄 Reset All Filters
+      </button>
+    </div>
+  </div>
+</div>
+
 
       {/* Table Section */}
       <div className="overflow-x-auto">
