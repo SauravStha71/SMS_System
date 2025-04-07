@@ -29,7 +29,7 @@ const PreviewDataCard = () => {
     maxBalance: "",
   });
 
-  const applyFilters = () => {};
+  const applyFilters = () => { };
 
   const resetFilters = () => {
     setFilters({
@@ -106,8 +106,8 @@ const PreviewDataCard = () => {
 
       {/* Table Section */}
       <div className="overflow-x-auto w-full max-w-6xl space-y-2">
-        {/* Rows per page dropdown */}
-        <div className="flex justify-end items-center gap-2 mb-2">
+        {/* Rows per page dropdown - moved to left side */}
+        <div className="flex justify-start items-center gap-2 mb-2">
           <label htmlFor="rowsPerPage" className="text-gray-700 font-medium">Show rows:</label>
           <select id="rowsPerPage" value={rowsPerPage} onChange={(e) => setRowsPerPage(parseInt(e.target.value))} className="border border-gray-300 rounded px-2 py-1">
             <option value={5}>5</option>
