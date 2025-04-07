@@ -160,6 +160,17 @@ const PreviewDataCard = () => {
           </tbody>
         </table>
       </div>
+      {/* Record Count Info */}
+<div className="w-full max-w-6xl mt-2 flex justify-between items-center">
+  <div className="text-gray-600 text-sm">
+    {(() => {
+      const startIndex = 0;
+      const endIndex = Math.min(rowsPerPage, filteredData.length);
+      return `Showing ${startIndex + 1} to ${endIndex} of ${filteredData.length} records`;
+    })()}
+  </div>
+</div>
+
     </div>
   );
 };
