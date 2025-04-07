@@ -19,7 +19,7 @@ const PreviewDataCard = () => {
     { branchCode: 214, branch: "BHAKTAPUR DC", scno: "214.33.014BHA1", customerId: 410, name: "Ramesh Basnet", address: "Bhaktapur", mobile: "9801122334", days: 67, balance: 134, status: "Sent", sentAt: "04-Mar-25" },
   ];
 
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedIds, setSelectedIds] = useState([]);
   const [filters, setFilters] = useState({
     minDays: "",
@@ -29,7 +29,7 @@ const PreviewDataCard = () => {
   });
 
   const applyFilters = () => {
-    // Filtering logic will run naturally below
+    // Filtering logic is handled below
   };
 
   const resetFilters = () => {
@@ -48,10 +48,15 @@ const PreviewDataCard = () => {
     const maxDays = filters.maxDays ? parseInt(filters.maxDays) : Infinity;
     const minBalance = filters.minBalance ? parseFloat(filters.minBalance) : -Infinity;
     const maxBalance = filters.maxBalance ? parseFloat(filters.maxBalance) : Infinity;
-    return days >= minDays && days <= maxDays && balance >= minBalance && balance <= maxBalance;
-  });
 
-  const displayedData = filteredData.slice(0, rowsPerPage);
+    const matchesFilter = days >= minDays && days <= maxDays && balance >= minBalance && balance <= maxBalance;
+
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.mobile.includes(searchTerm) ||
+      item.address.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return matchesFilter && matchesSearch;
+  });
 
   const toggleSelect = (id) => {
     setSelectedIds((prev) =>
@@ -131,21 +136,20 @@ const PreviewDataCard = () => {
         </div>
       </div>
 
-      {/* Controls */}
+      {/* Controls Section with Search */}
       <div className="w-full max-w-6xl mb-4 flex justify-between items-center">
+        {/* Search Input */}
         <div className="flex items-center gap-2">
-          <span>Show:</span>
-          <select
-            className="border border-gray-300 rounded px-2 py-1"
-            value={rowsPerPage}
-            onChange={(e) => setRowsPerPage(Number(e.target.value))}
-          >
-            {[10, 25, 50, 100].map((num) => (
-              <option key={num} value={num}>{num}</option>
-            ))}
-          </select>
-          <span>rows per page</span>
+          <input
+            type="text"
+            placeholder="🔍 Search contacts..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border border-gray-300 rounded px-3 py-2 w-64"
+          />
         </div>
+
+        {/* Selected Info & Clear */}
         <div className="flex items-center gap-2">
           <span className="text-blue-600 font-medium">
             <i className="mr-1">✔</i>{selectedIds.length} selected
@@ -179,7 +183,7 @@ const PreviewDataCard = () => {
             </tr>
           </thead>
           <tbody>
-            {displayedData.map((item) => (
+            {filteredData.map((item) => (
               <tr key={item.customerId} className="even:bg-blue-50">
                 <td className="p-3 border text-center">
                   <input
