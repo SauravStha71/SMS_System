@@ -21,6 +21,7 @@ const PreviewDataCard = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedIds, setSelectedIds] = useState([]);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [filters, setFilters] = useState({
     minDays: "",
     maxDays: "",
@@ -28,9 +29,7 @@ const PreviewDataCard = () => {
     maxBalance: "",
   });
 
-  const applyFilters = () => {
-    // Filtering logic is handled below
-  };
+  const applyFilters = () => {};
 
   const resetFilters = () => {
     setFilters({
@@ -50,7 +49,6 @@ const PreviewDataCard = () => {
     const maxBalance = filters.maxBalance ? parseFloat(filters.maxBalance) : Infinity;
 
     const matchesFilter = days >= minDays && days <= maxDays && balance >= minBalance && balance <= maxBalance;
-
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.mobile.includes(searchTerm) ||
       item.address.toLowerCase().includes(searchTerm.toLowerCase());
@@ -68,103 +66,59 @@ const PreviewDataCard = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-start bg-gray-100 p-4 overflow-y-auto">
-      
       {/* Filters Section */}
       <div className="flex justify-center items-start mb-6 w-full">
         <div className="w-full max-w-5xl space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            {/* Overdue Days */}
             <div className="bg-blue-100 p-4 rounded-lg shadow-md">
               <label className="font-semibold text-blue-800 block mb-2">Overdue Days</label>
               <div className="flex gap-2">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  value={filters.minDays}
-                  onChange={(e) => setFilters({ ...filters, minDays: e.target.value })}
-                  className="border p-2 rounded w-24"
-                />
+                <input type="number" placeholder="Min" value={filters.minDays} onChange={(e) => setFilters({ ...filters, minDays: e.target.value })} className="border p-2 rounded w-24" />
                 <span className="mt-2">to</span>
-                <input
-                  type="number"
-                  placeholder="Max"
-                  value={filters.maxDays}
-                  onChange={(e) => setFilters({ ...filters, maxDays: e.target.value })}
-                  className="border p-2 rounded w-24"
-                />
-                <button onClick={applyFilters} className="bg-blue-500 text-white px-4 py-2 rounded">
-                  ✔ Apply
-                </button>
+                <input type="number" placeholder="Max" value={filters.maxDays} onChange={(e) => setFilters({ ...filters, maxDays: e.target.value })} className="border p-2 rounded w-24" />
+                <button onClick={applyFilters} className="bg-blue-500 text-white px-4 py-2 rounded">✔ Apply</button>
               </div>
             </div>
-
-            {/* Balance Amount */}
             <div className="bg-blue-100 p-4 rounded-lg shadow-md">
               <label className="font-semibold text-blue-800 block mb-2">Balance Amount</label>
               <div className="flex gap-2">
-                <input
-                  type="number"
-                  placeholder="Min"
-                  value={filters.minBalance}
-                  onChange={(e) => setFilters({ ...filters, minBalance: e.target.value })}
-                  className="border p-2 rounded w-24"
-                />
+                <input type="number" placeholder="Min" value={filters.minBalance} onChange={(e) => setFilters({ ...filters, minBalance: e.target.value })} className="border p-2 rounded w-24" />
                 <span className="mt-2">to</span>
-                <input
-                  type="number"
-                  placeholder="Max"
-                  value={filters.maxBalance}
-                  onChange={(e) => setFilters({ ...filters, maxBalance: e.target.value })}
-                  className="border p-2 rounded w-24"
-                />
-                <button onClick={applyFilters} className="bg-blue-500 text-white px-4 py-2 rounded">
-                  ✔ Apply
-                </button>
+                <input type="number" placeholder="Max" value={filters.maxBalance} onChange={(e) => setFilters({ ...filters, maxBalance: e.target.value })} className="border p-2 rounded w-24" />
+                <button onClick={applyFilters} className="bg-blue-500 text-white px-4 py-2 rounded">✔ Apply</button>
               </div>
             </div>
           </div>
-
-          {/* Reset Button */}
           <div className="flex justify-end">
-            <button
-              onClick={resetFilters}
-              className="bg-gray-500 text-white px-6 py-2 rounded flex items-center"
-            >
-              🔄 Reset All Filters
-            </button>
+            <button onClick={resetFilters} className="bg-gray-500 text-white px-6 py-2 rounded flex items-center">🔄 Reset All Filters</button>
           </div>
         </div>
       </div>
 
-      {/* Controls Section with Search */}
+      {/* Controls */}
       <div className="w-full max-w-6xl mb-4 flex justify-between items-center">
-        {/* Search Input */}
+        <input type="text" placeholder="🔍 Search contacts..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="border border-gray-300 rounded px-3 py-2 w-64" />
         <div className="flex items-center gap-2">
-          <input
-            type="text"
-            placeholder="🔍 Search contacts..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-gray-300 rounded px-3 py-2 w-64"
-          />
-        </div>
-
-        {/* Selected Info & Clear */}
-        <div className="flex items-center gap-2">
-          <span className="text-blue-600 font-medium">
-            <i className="mr-1">✔</i>{selectedIds.length} selected
-          </span>
-          <button
-            className="text-red-500 border border-red-400 px-3 py-1 rounded hover:bg-red-100"
-            onClick={clearSelection}
-          >
-            ✖ Clear All
-          </button>
+          <span className="text-blue-600 font-medium"><i className="mr-1">✔</i>{selectedIds.length} selected</span>
+          <button className="text-red-500 border border-red-400 px-3 py-1 rounded hover:bg-red-100" onClick={clearSelection}>✖ Clear All</button>
         </div>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto w-full max-w-6xl">
+      {/* Table Section */}
+      <div className="overflow-x-auto w-full max-w-6xl space-y-2">
+        {/* Rows per page dropdown */}
+        <div className="flex justify-end items-center gap-2 mb-2">
+          <label htmlFor="rowsPerPage" className="text-gray-700 font-medium">Show rows:</label>
+          <select id="rowsPerPage" value={rowsPerPage} onChange={(e) => setRowsPerPage(parseInt(e.target.value))} className="border border-gray-300 rounded px-2 py-1">
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={15}>15</option>
+            <option value={20}>20</option>
+            <option value={filteredData.length}>All</option>
+          </select>
+        </div>
+
+        {/* Table */}
         <table className="min-w-full border border-gray-300 shadow-md rounded-lg bg-white">
           <thead>
             <tr className="bg-blue-500 text-white">
@@ -183,14 +137,10 @@ const PreviewDataCard = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((item) => (
+            {filteredData.slice(0, rowsPerPage).map((item) => (
               <tr key={item.customerId} className="even:bg-blue-50">
                 <td className="p-3 border text-center">
-                  <input
-                    type="checkbox"
-                    checked={selectedIds.includes(item.customerId)}
-                    onChange={() => toggleSelect(item.customerId)}
-                  />
+                  <input type="checkbox" checked={selectedIds.includes(item.customerId)} onChange={() => toggleSelect(item.customerId)} />
                 </td>
                 <td className="p-3 border">{item.branchCode}</td>
                 <td className="p-3 border">{item.branch}</td>
@@ -202,9 +152,7 @@ const PreviewDataCard = () => {
                 <td className="p-3 border">{item.days}</td>
                 <td className="p-3 border">{item.balance}</td>
                 <td className="p-3 border">
-                  <span className="bg-blue-500 text-white px-2 py-1 rounded-full">
-                    {item.status}
-                  </span>
+                  <span className="bg-blue-500 text-white px-2 py-1 rounded-full">{item.status}</span>
                 </td>
                 <td className="p-3 border">{item.sentAt}</td>
               </tr>
