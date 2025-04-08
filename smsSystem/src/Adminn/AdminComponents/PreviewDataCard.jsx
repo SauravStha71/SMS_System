@@ -65,7 +65,7 @@ const PreviewDataCard = () => {
   const clearSelection = () => setSelectedIds([]);
 
   return (
-    <div className="min-h-screen overflow-y-auto flex flex-col items-center justify-start bg-gray-100 p-4">
+    <div className="min-h-screen overflow-y-auto flex flex-col items-center justify-start bg-white p-4">
  
       {/* Filters Section */}
       <div className="flex justify-center items-start mb-6 w-full">
