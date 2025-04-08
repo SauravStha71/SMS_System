@@ -68,7 +68,7 @@ const PreviewDataCard = () => {
     <div className="min-h-screen overflow-y-auto flex flex-col items-center justify-start bg-white p-4">
  
       {/* Filters Section */}
-      <div className="flex justify-center items-start mb-6 w-full">
+      <div className="flex justify-end mt-2">
         <div className="w-full max-w-5xl space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-blue-100 p-4 rounded-lg shadow-md">
@@ -77,7 +77,7 @@ const PreviewDataCard = () => {
                 <input type="number" placeholder="Min" value={filters.minDays} onChange={(e) => setFilters({ ...filters, minDays: e.target.value })} className="border p-2 rounded w-24" />
                 <span className="mt-2">to</span>
                 <input type="number" placeholder="Max" value={filters.maxDays} onChange={(e) => setFilters({ ...filters, maxDays: e.target.value })} className="border p-2 rounded w-24" />
-                <button onClick={applyFilters} className="bg-blue-500 text-white px-4 py-2 rounded">✔ Apply</button>
+                <button onClick={applyFilters} className="bg-blue-500 text-white px-8 py-3 rounded-lg shadow hover:bg-blue-600 transition">✔ Apply   </button>
               </div>
             </div>
             <div className="bg-blue-100 p-4 rounded-lg shadow-md">
@@ -86,7 +86,7 @@ const PreviewDataCard = () => {
                 <input type="number" placeholder="Min" value={filters.minBalance} onChange={(e) => setFilters({ ...filters, minBalance: e.target.value })} className="border p-2 rounded w-24" />
                 <span className="mt-2">to</span>
                 <input type="number" placeholder="Max" value={filters.maxBalance} onChange={(e) => setFilters({ ...filters, maxBalance: e.target.value })} className="border p-2 rounded w-24" />
-                <button onClick={applyFilters} className="bg-blue-500 text-white px-4 py-2 rounded">✔ Apply</button>
+                <button onClick={applyFilters} className="bg-blue-500 text-white px-8 py-3 rounded-lg shadow hover:bg-blue-600 transition">✔ Apply</button>
               </div>
             </div>
           </div>
