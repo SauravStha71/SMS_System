@@ -22,7 +22,34 @@ const SMSReportCard = () => {
     ];
 
   return (
-    <div className="min-h-screen flex justify-center bg-gray-100 p-6">
+    <div className="min-h-screen flex flex-col items-center bg-white p-6">
+      {/* Filter Section */}
+<div className="w-full max-w-7xl bg-white rounded-xl p-6 mb-6 ">
+  <div className="flex flex-wrap justify-center gap-6 items-end">
+    
+    {/* Start Date Section */}
+    <div className="bg-blue-100 rounded-lg p-4 ">
+      <label className="block mb-1 font-semibold text-blue-800">Start Date:</label>
+      <input type="date" className="p-2 border rounded-md w-full" />
+    </div>
+
+    {/* End Date Section */}
+    <div className="bg-blue-100 rounded-lg p-4 ">
+      <label className="block mb-1 font-semibold text-blue-800">End Date:</label>
+      <input type="date" className="p-2 border rounded-md w-full" />
+    </div>
+
+    {/* Filter Button */}
+    <div className="mt-2">
+      <button className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-all">
+        Filter
+      </button>
+    </div>
+
+  </div>
+</div>
+
+      {/* Table Section */}
       <div className="overflow-x-auto w-full max-w-7xl">
         <table className="min-w-full border border-gray-300 shadow-md rounded-lg bg-white">
           <thead>
@@ -53,7 +80,9 @@ const SMSReportCard = () => {
                 <td className="p-3 border">{item.days}</td>
                 <td className="p-3 border">{item.balance}</td>
                 <td className="p-3 border">
-                  <span className="bg-blue-500 text-white px-2 py-1 rounded-full">{item.status}</span>
+                  <span className="bg-blue-500 text-white px-2 py-1 rounded-full">
+                    {item.status}
+                  </span>
                 </td>
                 <td className="p-3 border">{item.sentAt}</td>
               </tr>
