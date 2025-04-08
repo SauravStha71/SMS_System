@@ -22,6 +22,7 @@ const PreviewDataCard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedIds, setSelectedIds] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
     minDays: "",
     maxDays: "",
@@ -29,7 +30,7 @@ const PreviewDataCard = () => {
     maxBalance: "",
   });
 
-  const applyFilters = () => { };
+  const applyFilters = () => {};
 
   const resetFilters = () => {
     setFilters({
@@ -38,6 +39,7 @@ const PreviewDataCard = () => {
       minBalance: "",
       maxBalance: "",
     });
+    setCurrentPage(1);
   };
 
   const filteredData = data.filter((item) => {
@@ -56,6 +58,9 @@ const PreviewDataCard = () => {
     return matchesFilter && matchesSearch;
   });
 
+  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+  const paginatedData = filteredData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+
   const toggleSelect = (id) => {
     setSelectedIds((prev) =>
       prev.includes(id) ? prev.filter((cid) => cid !== id) : [...prev, id]
@@ -66,7 +71,8 @@ const PreviewDataCard = () => {
 
   return (
     <div className="min-h-screen overflow-y-auto flex flex-col items-center justify-start bg-white p-4">
- 
+
+      
       {/* Filters Section */}
       <div className="flex justify-end mt-2">
         <div className="w-full max-w-5xl space-y-4">
@@ -107,10 +113,12 @@ const PreviewDataCard = () => {
 
       {/* Table Section */}
       <div className="overflow-x-auto w-full max-w-6xl space-y-2">
-        {/* Rows per page dropdown - moved to left side */}
         <div className="flex justify-start items-center gap-2 mb-2">
           <label htmlFor="rowsPerPage" className="text-gray-700 font-medium">Show rows:</label>
-          <select id="rowsPerPage" value={rowsPerPage} onChange={(e) => setRowsPerPage(parseInt(e.target.value))} className="border border-gray-300 rounded px-2 py-1">
+          <select id="rowsPerPage" value={rowsPerPage} onChange={(e) => {
+            setRowsPerPage(parseInt(e.target.value));
+            setCurrentPage(1);
+          }} className="border border-gray-300 rounded px-2 py-1">
             <option value={5}>5</option>
             <option value={10}>10</option>
             <option value={15}>15</option>
@@ -123,7 +131,7 @@ const PreviewDataCard = () => {
         <table className="min-w-full border border-gray-300 shadow-md rounded-lg bg-white">
           <thead>
             <tr className="bg-blue-500 text-white">
-              <th className="p-3 border">Select</th>
+            <th className="p-3 border">Select</th>
               <th className="p-3 border">Branch Code</th>
               <th className="p-3 border">Branch</th>
               <th className="p-3 border">SCNO</th>
@@ -138,7 +146,7 @@ const PreviewDataCard = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.slice(0, rowsPerPage).map((item) => (
+            {paginatedData.map((item) => (
               <tr key={item.customerId} className="even:bg-blue-50">
                 <td className="p-3 border text-center">
                   <input type="checkbox" checked={selectedIds.includes(item.customerId)} onChange={() => toggleSelect(item.customerId)} />
@@ -161,16 +169,26 @@ const PreviewDataCard = () => {
           </tbody>
         </table>
       </div>
-      {/* Record Count Info */}
-<div className="w-full max-w-6xl mt-2 flex justify-between items-center">
-  <div className="text-gray-600 text-sm">
-    {(() => {
-      const startIndex = 0;
-      const endIndex = Math.min(rowsPerPage, filteredData.length);
-      return `Showing ${startIndex + 1} to ${endIndex} of ${filteredData.length} records`;
-    })()}
-  </div>
-</div>
+
+      {/* Pagination Controls */}
+      <div className="w-full max-w-6xl mt-4 flex justify-between items-center">
+        <div className="text-gray-600 text-sm">
+          Showing {(currentPage - 1) * rowsPerPage + 1} to {Math.min(currentPage * rowsPerPage, filteredData.length)} of {filteredData.length} records
+        </div>
+        <div className="flex gap-2">
+          <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} disabled={currentPage === 1} className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Previous</button>
+          {[...Array(totalPages)].map((_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => setCurrentPage(index + 1)}
+              className={`px-3 py-1 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Next</button>
+        </div>
+      </div>
 
     </div>
   );
