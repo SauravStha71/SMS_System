@@ -77,6 +77,7 @@ const UserHeader = () => {
             {[
               { name: "Dashboard", href: "/user/dashboard" },
               { name: "Preview Data", href: "/user/preview-data" },
+              { name: "Yesterday's Data", href: "/user/yesterdays-data" }, // <- Added link
               { name: "SMS Report", href: "/user/sms-report" },
               { name: "Log Out", href: "/logout", special: true },
             ].map(({ name, href, special }) => (
