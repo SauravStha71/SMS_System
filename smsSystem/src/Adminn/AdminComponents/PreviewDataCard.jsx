@@ -51,10 +51,10 @@ const PreviewDataCard = () => {
     const maxBalance = filters.maxBalance ? parseFloat(filters.maxBalance) : Infinity;
 
     const matchesFilter = days >= minDays && days <= maxDays && balance >= minBalance && balance <= maxBalance;
-    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.mobile.includes(searchTerm) ||
-      item.address.toLowerCase().includes(searchTerm.toLowerCase());
-
+    const matchesSearch = Object.values(item).some(value =>
+      String(value).toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    
     return matchesFilter && matchesSearch;
   });
 
