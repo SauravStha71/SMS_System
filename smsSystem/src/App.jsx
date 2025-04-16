@@ -8,6 +8,7 @@ import DashboardCard from './Adminn/AdminComponents/DashboardCard';
 import PreviewDataCard from './Adminn/AdminComponents/PreviewDataCard';
 import SMSReportCard from './Adminn/AdminComponents/SMSReportCard';
 import ManageUserCard from './Adminn/AdminComponents/ManageUserCard';
+import YesterdayDataCard from './Adminn/AdminComponents/YesterdayDataCard';
 
 const App = () => {
   return (
@@ -36,6 +37,15 @@ const App = () => {
           }
         />
         <Route
+          path="/admin/yesterday-data" // 🆕 New Route Path
+          element={
+            <>
+              <AdminHeader />
+              <YesterdayDataCard /> {/* 🆕 Component */}
+            </>
+          }
+        />
+        <Route
           path="/admin/sms-report"
           element={
             <>
@@ -45,21 +55,20 @@ const App = () => {
           }
         />
         <Route
-  path="/admin/manage-users"
-  element={
-    <>
-      <AdminHeader />
-      <ManageUserCard
-        users={[
-          { name: "Alice Sharma", email: "alice@example.com", role: "Admin" },
-          { name: "Bikash Thapa", email: "bikash@example.com", role: "User" },
-          { name: "Sita Ram", email: "sita@example.com", role: "Manager" },
-        ]}
-      />
-    </>
-  }
-/>
-
+          path="/admin/manage-users"
+          element={
+            <>
+              <AdminHeader />
+              <ManageUserCard
+                users={[
+                  { name: "Alice Sharma", email: "alice@example.com", role: "Admin" },
+                  { name: "Bikash Thapa", email: "bikash@example.com", role: "User" },
+                  { name: "Sita Ram", email: "sita@example.com", role: "Manager" },
+                ]}
+              />
+            </>
+          }
+        />
       </Routes>
     </Router>
   );

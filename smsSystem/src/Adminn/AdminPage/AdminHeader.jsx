@@ -12,10 +12,11 @@ const AdminHeader = () => {
     navigate('/');
   };
 
-  // Define nav links
+  // Updated nav links
   const links = [
     { name: "Dashboard", to: "/admin/dashboard" },
     { name: "Preview Data", to: "/admin/preview-data" },
+    { name: "Yesterday's Data", to: "/admin/yesterday-data" }, // 👈 Inserted here
     { name: "SMS Report", to: "/admin/sms-report" },
     { name: "Manage User", to: "/admin/manage-users" },
   ];
@@ -48,7 +49,7 @@ const AdminHeader = () => {
           .admin-header__navbar-container {
             position: absolute;
             top: 170px;
-            left: 50%;
+            left:55%;
             transform: translateX(-50%);
             z-index: 10;
           }
