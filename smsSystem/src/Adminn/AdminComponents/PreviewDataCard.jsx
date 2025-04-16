@@ -104,7 +104,7 @@ const PreviewDataCard = () => {
 
       {/* Controls */}
       <div className="w-full max-w-6xl mb-4 flex justify-between items-center">
-        <input type="text" placeholder="🔍 Search contacts..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="border border-gray-300 rounded px-3 py-2 w-64" />
+        <input type="text" placeholder="🔍 Search " value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="border border-gray-300 rounded px-3 py-2 w-64" />
         <div className="flex items-center gap-2">
           <span className="text-blue-600 font-medium"><i className="mr-1">✔</i>{selectedIds.length} selected</span>
           <button className="text-red-500 border border-red-400 px-3 py-1 rounded hover:bg-red-100" onClick={clearSelection}>✖ Clear All</button>
