@@ -129,22 +129,40 @@ const PreviewDataCard = () => {
 
         {/* Table */}
         <table className="min-w-full border border-gray-300 shadow-md rounded-lg bg-white">
-          <thead>
-            <tr className="bg-blue-500 text-white">
-            <th className="p-3 border">Select</th>
-              <th className="p-3 border">Branch Code</th>
-              <th className="p-3 border">Branch</th>
-              <th className="p-3 border">SCNO</th>
-              <th className="p-3 border">Customer Id</th>
-              <th className="p-3 border">Name</th>
-              <th className="p-3 border">Address</th>
-              <th className="p-3 border">Mobile</th>
-              <th className="p-3 border">Days</th>
-              <th className="p-3 border">Balance</th>
-              <th className="p-3 border">Status</th>
-              <th className="p-3 border">Sent At</th>
-            </tr>
-          </thead>
+        <thead>
+  <tr className="bg-blue-500 text-white">
+    <th className="p-3 border text-center">
+      <input
+        type="checkbox"
+        checked={paginatedData.every(item => selectedIds.includes(item.customerId))}
+        onChange={(e) => {
+          if (e.target.checked) {
+            const newSelections = paginatedData
+              .map(item => item.customerId)
+              .filter(id => !selectedIds.includes(id));
+            setSelectedIds([...selectedIds, ...newSelections]);
+          } else {
+            const newSelections = selectedIds.filter(
+              id => !paginatedData.some(item => item.customerId === id)
+            );
+            setSelectedIds(newSelections);
+          }
+        }}
+      />
+    </th>
+    <th className="p-3 border">Branch Code</th>
+    <th className="p-3 border">Branch</th>
+    <th className="p-3 border">SCNO</th>
+    <th className="p-3 border">Customer Id</th>
+    <th className="p-3 border">Name</th>
+    <th className="p-3 border">Address</th>
+    <th className="p-3 border">Mobile</th>
+    <th className="p-3 border">Days</th>
+    <th className="p-3 border">Balance</th>
+    <th className="p-3 border">Status</th>
+    <th className="p-3 border">Sent At</th>
+  </tr>
+</thead>
           <tbody>
             {paginatedData.map((item) => (
               <tr key={item.customerId} className="even:bg-blue-50">
