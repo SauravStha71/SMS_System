@@ -150,7 +150,7 @@ const PreviewDataCard = () => {
 
 
       {/* Controls */}
-<div className="w-full max-w-6xl mb-3 flex justify-between items-center">
+<div className="w-full max-w-6xl mb-3 flex justify-between items-center bg-white px-4 py-3 rounded shadow"> 
   <input
     type="text"
     placeholder="🔍 Search"
@@ -294,9 +294,7 @@ const PreviewDataCard = () => {
     )}
   </div>
 </div>
-
-
-    </div>
+</div>
   );
 };
 
