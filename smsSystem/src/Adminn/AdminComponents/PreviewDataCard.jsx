@@ -29,6 +29,7 @@ const PreviewDataCard = () => {
     minBalance: "",
     maxBalance: "",
   });
+  const [showPreview, setShowPreview] = useState(false);
 
   const applyFilters = () => {};
 
@@ -68,50 +69,110 @@ const PreviewDataCard = () => {
   };
 
   const clearSelection = () => setSelectedIds([]);
+  const selectedData = data.filter(item => selectedIds.includes(item.customerId));
 
   return (
     <div className="min-h-screen overflow-y-auto flex flex-col items-center justify-start bg-white p-4">
 
       
-      {/* Filters Section */}
-      <div className="flex justify-end mt-2">
-        <div className="w-full max-w-5xl space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-blue-100 p-4 rounded-lg shadow-md">
-              <label className="font-semibold text-blue-800 block mb-2">Overdue Days</label>
-              <div className="flex gap-2">
-                <input type="number" placeholder="Min" value={filters.minDays} onChange={(e) => setFilters({ ...filters, minDays: e.target.value })} className="border p-2 rounded w-24" />
-                <span className="mt-2">to</span>
-                <input type="number" placeholder="Max" value={filters.maxDays} onChange={(e) => setFilters({ ...filters, maxDays: e.target.value })} className="border p-2 rounded w-24" />
-                <button onClick={applyFilters} className="bg-blue-500 text-white px-8 py-3 rounded-lg shadow hover:bg-blue-600 transition">✔ Apply   </button>
-              </div>
-            </div>
-            <div className="bg-blue-100 p-4 rounded-lg shadow-md">
-              <label className="font-semibold text-blue-800 block mb-2">Balance Amount</label>
-              <div className="flex gap-2">
-                <input type="number" placeholder="Min" value={filters.minBalance} onChange={(e) => setFilters({ ...filters, minBalance: e.target.value })} className="border p-2 rounded w-24" />
-                <span className="mt-2">to</span>
-                <input type="number" placeholder="Max" value={filters.maxBalance} onChange={(e) => setFilters({ ...filters, maxBalance: e.target.value })} className="border p-2 rounded w-24" />
-                <button onClick={applyFilters} className="bg-blue-500 text-white px-8 py-3 rounded-lg shadow hover:bg-blue-600 transition">✔ Apply</button>
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-end">
-            <button onClick={resetFilters} className="bg-gray-500 text-white px-6 py-2 rounded flex items-center">🔄 Reset All Filters</button>
-          </div>
+     {/* Filters Section */}
+<div className="flex justify-end mt-2">
+  <div className="w-full max-w-5xl space-y-3">
+    <div className="grid grid-cols-2 gap-4">
+      {/* Overdue Days Filter */}
+      <div className="bg-blue-100 p-3 rounded-lg shadow-md">
+        <label className="font-semibold text-blue-800 block mb-1">Overdue Days</label>
+        <div className="flex items-center gap-2">
+          <input
+            type="number"
+            placeholder="Min"
+            value={filters.minDays}
+            onChange={(e) => setFilters({ ...filters, minDays: e.target.value })}
+            className="border p-1 rounded w-20 text-sm"
+          />
+          <span className="text-sm text-gray-700">to</span>
+          <input
+            type="number"
+            placeholder="Max"
+            value={filters.maxDays}
+            onChange={(e) => setFilters({ ...filters, maxDays: e.target.value })}
+            className="border p-1 rounded w-20 text-sm"
+          />
+          <button
+            onClick={applyFilters}
+            className="bg-blue-500 text-white px-4 py-1.5 rounded shadow hover:bg-blue-600 text-sm transition"
+          >
+            ✔ Apply
+          </button>
         </div>
       </div>
+
+      {/* Balance Amount Filter */}
+      <div className="bg-blue-100 p-3 rounded-lg shadow-md">
+        <label className="font-semibold text-blue-800 block mb-1">Balance Amount</label>
+        <div className="flex items-center gap-2">
+          <input
+            type="number"
+            placeholder="Min"
+            value={filters.minBalance}
+            onChange={(e) => setFilters({ ...filters, minBalance: e.target.value })}
+            className="border p-1 rounded w-20 text-sm"
+          />
+          <span className="text-sm text-gray-700">to</span>
+          <input
+            type="number"
+            placeholder="Max"
+            value={filters.maxBalance}
+            onChange={(e) => setFilters({ ...filters, maxBalance: e.target.value })}
+            className="border p-1 rounded w-20 text-sm"
+          />
+          <button
+            onClick={applyFilters}
+            className="bg-blue-500 text-white px-4 py-1.5 rounded shadow hover:bg-blue-600 text-sm transition"
+          >
+            ✔ Apply
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {/* Reset Button */}
+<div className="flex justify-end">
+  <button
+    onClick={resetFilters}
+    className="bg-gray-500 text-white px-3 py-1 text-sm rounded hover:bg-gray-600 flex items-center gap-1">
+    🔄 Reset Filters
+  </button>
+</div>
+
+  </div>
+</div>
+
 
       {/* Controls */}
-      <div className="w-full max-w-6xl mb-4 flex justify-between items-center">
-        <input type="text" placeholder="🔍 Search " value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="border border-gray-300 rounded px-3 py-2 w-64" />
-        <div className="flex items-center gap-2">
-          <span className="text-blue-600 font-medium"><i className="mr-1">✔</i>{selectedIds.length} selected</span>
-          <button className="text-red-500 border border-red-400 px-3 py-1 rounded hover:bg-red-100" onClick={clearSelection}>✖ Clear All</button>
-        </div>
-      </div>
+<div className="w-full max-w-6xl mb-3 flex justify-between items-center">
+  <input
+    type="text"
+    placeholder="🔍 Search"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    className="border border-gray-300 rounded px-2 py-1 text-sm w-56"
+  />
+  <div className="flex items-center gap-2 text-sm">
+    <span className="text-blue-600 font-medium flex items-center">
+      ✔ {selectedIds.length} selected
+    </span>
+    <button
+      className="text-red-500 border border-red-400 px-2 py-1 rounded hover:bg-red-100"
+      onClick={clearSelection}
+    >
+      ❌ Clear All
+    </button>
+  </div>
+</div>
 
-      {/* Table Section */}
+
+      {/* Show Rows Section */}
       <div className="overflow-x-auto w-full max-w-6xl space-y-2">
         <div className="flex justify-start items-center gap-2 mb-2">
           <label htmlFor="rowsPerPage" className="text-gray-700 font-medium">Show rows:</label>
@@ -164,7 +225,7 @@ const PreviewDataCard = () => {
   </tr>
 </thead>
           <tbody>
-            {paginatedData.map((item) => (
+          {(showPreview ? selectedData : paginatedData).map((item) => (
               <tr key={item.customerId} className="even:bg-blue-50">
                 <td className="p-3 border text-center">
                   <input type="checkbox" checked={selectedIds.includes(item.customerId)} onChange={() => toggleSelect(item.customerId)} />
@@ -207,6 +268,33 @@ const PreviewDataCard = () => {
           <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Next</button>
         </div>
       </div>
+      <div className="w-full max-w-6xl mt-4 flex justify-between items-center">
+  {/* Left Side - Back to Table Button */}
+  <div>
+    {showPreview && (
+      <button
+        className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+        onClick={() => setShowPreview(false)}
+      >
+        🔙 Back to Full Table
+      </button>
+    )}
+  </div>
+
+  {/* Right Side - Preview Selected Button */}
+  <div>
+    {!showPreview && (
+      <button
+        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 disabled:opacity-50"
+        onClick={() => setShowPreview(true)}
+        disabled={selectedIds.length === 0}
+      >
+        👁️ Preview Selected ({selectedIds.length})
+      </button>
+    )}
+  </div>
+</div>
+
 
     </div>
   );
