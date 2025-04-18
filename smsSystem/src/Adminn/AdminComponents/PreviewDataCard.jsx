@@ -70,7 +70,7 @@ const PreviewDataCard = () => {
   const clearSelection = () => setSelectedIds([]);
 
   return (
-    <div className="min-h-screen overflow-y-auto flex flex-col items-center justify-start bg-white p-4">
+    <div className="   flex flex-col items-center justify-start bg-gray-200 p-4">
 
       
       {/* Filters Section */}
@@ -112,7 +112,7 @@ const PreviewDataCard = () => {
       </div>
 
       {/* Table Section */}
-      <div className="overflow-x-auto w-full max-w-6xl space-y-2">
+      {/* <div className="overflow-x-auto w-full max-w-6xl space-y-2"> */}
         <div className="flex justify-start items-center gap-2 mb-2">
           <label htmlFor="rowsPerPage" className="text-gray-700 font-medium">Show rows:</label>
           <select id="rowsPerPage" value={rowsPerPage} onChange={(e) => {
@@ -168,7 +168,7 @@ const PreviewDataCard = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      {/* </div> */}
 
       {/* Pagination Controls */}
       <div className="w-full max-w-6xl mt-4 flex justify-between items-center">
