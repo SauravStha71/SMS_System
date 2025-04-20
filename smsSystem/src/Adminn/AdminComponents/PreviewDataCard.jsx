@@ -102,7 +102,7 @@ const PreviewDataCard = () => {
             onClick={applyFilters}
             className="bg-blue-500 text-white px-4 py-1.5 rounded shadow hover:bg-blue-600 text-sm transition"
           >
-            ✔ Apply
+            Apply
           </button>
         </div>
       </div>
@@ -130,7 +130,7 @@ const PreviewDataCard = () => {
             onClick={applyFilters}
             className="bg-blue-500 text-white px-4 py-1.5 rounded shadow hover:bg-blue-600 text-sm transition"
           >
-            ✔ Apply
+            Apply
           </button>
         </div>
       </div>
