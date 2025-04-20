@@ -19,29 +19,81 @@ const SMSReportCard = () => {
     { branchCode: 210, branch: "HETAUDA DC", scno: "210.36.011CHA0KA", customerId: 73, name: "Rajesh Yadav", address: "NOADD13", mobile: "9841234567", days: 92, balance: 156, status: "Sent", sentAt: "15-Mar-25" },
     { branchCode: 211, branch: "KAVRE DC", scno: "211.37.012CHA1KA", customerId: 81, name: "Maya Tamang", address: "NOADD14", mobile: "9841323456", days: 67, balance: 245, status: "Pending", sentAt: "16-Mar-25" },
     { branchCode: 212, branch: "RAMECHHAP DC", scno: "212.38.013CHA2KA", customerId: 90, name: "Bishal Khatri", address: "NOADD15", mobile: "9841456789", days: 53, balance: 312, status: "Sent", sentAt: "17-Mar-25" },
+  ];
+
+  // CSV Download function
+  const downloadCSV = () => {
+    const headers = [
+      "Branch Code",
+      "Branch",
+      "SCNO",
+      "Customer Id",
+      "Name",
+      "Address",
+      "Mobile Number",
+      "No. of Days",
+      "Balance Amount",
+      "Status",
+      "Sent At"
     ];
+
+    const rows = data.map(item => [
+      item.branchCode,
+      item.branch,
+      item.scno,
+      item.customerId,
+      item.name,
+      item.address,
+      item.mobile,
+      item.days,
+      item.balance,
+      item.status,
+      item.sentAt
+    ]);
+
+    const csvContent = [headers, ...rows].map(e => e.join(",")).join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "todays_sms_report.csv";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-white p-6">
-      {/* Filter Section */}
-<div className="w-full max-w-7xl bg-white rounded-xl p-6 mb-6 ">
-  <div className="flex flex-wrap justify-center gap-6 items-end">
+      {/* Header + Download Button */}
+      <div className="w-full max-w-7xl flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold text-gray-700"></h2>
+        <button
+          onClick={downloadCSV}
+          className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
+        >
+          Download Today's Report
+        </button>
+      </div>
+
+{/* Filter Section */}
+<div className="flex justify-center mb-6">
+  <div className="flex gap-4 items-end">
     
-    {/* Start Date Section */}
-    <div className="bg-blue-100 rounded-lg p-4 ">
-      <label className="block mb-1 font-semibold text-blue-800">Start Date:</label>
-      <input type="date" className="p-2 border rounded-md w-full" />
+    {/* Start Date */}
+    <div className="bg-blue-100 p-3 rounded-lg shadow-md">
+      <label className="font-semibold text-blue-800 block mb-1">Start Date</label>
+      <input type="date" className="p-1 border border-gray-300 rounded-md text-sm w-36" />
     </div>
 
-    {/* End Date Section */}
-    <div className="bg-blue-100 rounded-lg p-4 ">
-      <label className="block mb-1 font-semibold text-blue-800">End Date:</label>
-      <input type="date" className="p-2 border rounded-md w-full" />
+    {/* End Date */}
+    <div className="bg-blue-100 p-3 rounded-lg shadow-md">
+      <label className="font-semibold text-blue-800 block mb-1">End Date</label>
+      <input type="date" className="p-1 border border-gray-300 rounded-md text-sm w-36" />
     </div>
 
     {/* Filter Button */}
-    <div className="mt-2">
-      <button className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-all">
+    <div className="pt-3">
+      <button className="bg-blue-600 text-white px-4 py-1.5 rounded-md text-sm hover:bg-blue-700 transition-all">
         Filter
       </button>
     </div>
