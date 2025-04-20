@@ -1,13 +1,29 @@
 import React from 'react';
-import AdminHeader from './Adminn/AdminPage/AdminHeader';
-import DashboardCard from './Adminn/AdminComponents/DashboardCard';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginRegister from './signIn/LoginRegister';
+import SMS_Report from './Container/SMS_Report';
+import Dashboard from './Container/Dashboard';
+import PreviewData from './Container/PreviewData';
+import ManageUser from './Container/ManageUser';
 
 const App = () => {
   return (
     <>
-      <AdminHeader />
-      <DashboardCard />
+    <BrowserRouter>
+      <Routes>
+        {/* Login Page */}
+        <Route path="/" element={<LoginRegister />} />
+
+        {/* Admin Pages - with Header + Page */}
+        <Route path="/dashboard" element={ <Dashboard/>}/>
+        <Route path="/preview-data" element={ <PreviewData/>}/>
+        <Route path="/sms-report" element={<SMS_Report/>} />
+        <Route path="/manage-users" element={<ManageUser/> }/>
+      </Routes>
+    </BrowserRouter>
+    
     </>
+    
   );
 };
 
