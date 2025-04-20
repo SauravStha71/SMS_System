@@ -25,7 +25,7 @@ const AdminHeader = () => {
     <div className="relative w-full h-[35vh] pb-24">
       {/* Background Image */}
       <div
-        className="md:h-[130px]  bg-cover bg-center"
+        className="md:h-[130px] h-[120px]  bg-cover object-fill  w-[100vw]  bg-center"
         style={{ backgroundImage: `url(${bgImage})` }}
       ></div>
 
@@ -33,7 +33,7 @@ const AdminHeader = () => {
       <img
         src={logo}
         alt="Logo"
-        className="absolute md:top-[13vh] top-[1vh] md:left-[3vw] left-[38vw] md:h-[18vh] rounded-full border-4 border-white z-20"
+        className="absolute md:top-[13vh] hidden md:block  md:left-[3vw] left-[3vw] md:h-[18vh] h-[92px] rounded-full border-4 border-white z-20"
       />
 
       {/* Navbar Container */}
