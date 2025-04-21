@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginRegister from './signIn/LoginRegister';
+
 import AdminHeader from './Adminn/AdminPage/AdminHeader';
 
 import DashboardCard from './Adminn/AdminComponents/DashboardCard';
@@ -10,14 +10,17 @@ import SMSReportCard from './Adminn/AdminComponents/SMSReportCard';
 import ManageUserCard from './Adminn/AdminComponents/ManageUserCard';
 import YesterdayDataCard from './Adminn/AdminComponents/YesterdayDataCard';
 
+
 const App = () => {
   return (
-    <Router>
+    <>
+    <BrowserRouter>
       <Routes>
         {/* Login Page */}
         <Route path="/" element={<LoginRegister />} />
 
         {/* Admin Pages - with Header + Page */}
+
         <Route
           path="/admin/dashboard"
           element={
@@ -69,8 +72,17 @@ const App = () => {
             </>
           }
         />
+
+        <Route path="/dashboard" element={ <Dashboard/>}/>
+        <Route path="/preview-data" element={ <PreviewData/>}/>
+        <Route path="/sms-report" element={<SMS_Report/>} />
+        <Route path="/manage-users" element={<ManageUser/> }/>
+
       </Routes>
-    </Router>
+    </BrowserRouter>
+    
+    </>
+    
   );
 };
 

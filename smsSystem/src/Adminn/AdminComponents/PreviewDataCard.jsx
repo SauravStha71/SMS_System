@@ -72,7 +72,7 @@ const PreviewDataCard = () => {
   const selectedData = data.filter(item => selectedIds.includes(item.customerId));
 
   return (
-    <div className="min-h-screen overflow-y-auto flex flex-col items-center justify-start bg-white p-4">
+    <div className="   flex flex-col items-center justify-start bg-gray-200 p-4">
 
       
      {/* Filters Section */}
@@ -149,6 +149,7 @@ const PreviewDataCard = () => {
 </div>
 
 
+
       {/* Controls */}
 <div className="w-full max-w-6xl mb-3 flex justify-between items-center bg-white px-4 py-3 rounded shadow"> 
   <input
@@ -174,6 +175,10 @@ const PreviewDataCard = () => {
 
       {/* Show Rows Section */}
       <div className="overflow-x-auto w-full max-w-6xl space-y-2">
+
+      {/* Table Section */}
+      {/* <div className="overflow-x-auto w-full max-w-6xl space-y-2"> */}
+
         <div className="flex justify-start items-center gap-2 mb-2">
           <label htmlFor="rowsPerPage" className="text-gray-700 font-medium">Show rows:</label>
           <select id="rowsPerPage" value={rowsPerPage} onChange={(e) => {
@@ -247,7 +252,7 @@ const PreviewDataCard = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      {/* </div> */}
 
       {/* Pagination Controls */}
       <div className="w-full max-w-6xl mt-4 flex justify-between items-center">
